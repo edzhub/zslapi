@@ -8,6 +8,13 @@
             "Edzhub\\Zslapi\\": "src/"
         }
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Edzhub\\Zslapi\\ZslapiServiceProvider\\"
+            ]
+        }
+    },
     "authors": [
         {
             "name": "Dasari Satyam",
