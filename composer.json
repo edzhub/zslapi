@@ -1,0 +1,19 @@
+{
+    "name": "edzhub/zslapi",
+    "description": "This Package will provide ZSL Content Access",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Edzhub\\Zslapi\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Dasari Satyam",
+            "email": "satyam161211149@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
