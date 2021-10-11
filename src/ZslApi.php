@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Http;
 
 class ZslApi
 {
+    const DEFAULT_URL = 'https://content.zerosciencelab.com/api/';
     const GET_CLASSES = 'Classes/get';
     const GET_SUBJECTS = 'Classes/get_subjects';
     const GET_CHAPTERS = 'Chapter/get';
@@ -17,7 +18,7 @@ class ZslApi
      */
     public static function getClasses()
     {
-        $response = Http::withToken(\config('zslapi.MANAGER_TOKEN'))->acceptJson()->post(config('zslapi.CONTENT_URL') . self::GET_CLASSES);
+        $response = Http::withToken(\config('zslapi.MANAGER_TOKEN'))->acceptJson()->post(config('zslapi.CONTENT_URL', self::DEFAULT_URL) . self::GET_CLASSES);
         return $response->json();
     }
 
@@ -27,7 +28,7 @@ class ZslApi
      */
     public static function getSubjects($class)
     {
-        $response = Http::withToken(\config('zslapi.MANAGER_TOKEN'))->acceptJson()->post(config('zslapi.CONTENT_URL') . self::GET_SUBJECTS, ['class' => $class]);
+        $response = Http::withToken(\config('zslapi.MANAGER_TOKEN'))->acceptJson()->post(config('zslapi.CONTENT_URL', self::DEFAULT_URL) . self::GET_SUBJECTS, ['class' => $class]);
         return $response->json();
     }
 
@@ -38,7 +39,7 @@ class ZslApi
      */
     public static function getChapters($class, $subject)
     {
-        $response = Http::withToken(\config('zslapi.MANAGER_TOKEN'))->acceptJson()->post(config('zslapi.CONTENT_URL') . self::GET_CHAPTERS, ['class' => $class, 'subject' => $subject]);
+        $response = Http::withToken(\config('zslapi.MANAGER_TOKEN'))->acceptJson()->post(config('zslapi.CONTENT_URL', self::DEFAULT_URL) . self::GET_CHAPTERS, ['class' => $class, 'subject' => $subject]);
         return $response->json();
     }
 
@@ -48,7 +49,7 @@ class ZslApi
      */
     public static function createUser($identifier = null)
     {
-        $response = Http::withToken(\config('zslapi.MANAGER_TOKEN'))->acceptJson()->post(config('zslapi.CONTENT_URL') . self::CREATE_USER, ['identifier' => $identifier]);
+        $response = Http::withToken(\config('zslapi.MANAGER_TOKEN'))->acceptJson()->post(config('zslapi.CONTENT_URL', self::DEFAULT_URL) . self::CREATE_USER, ['identifier' => $identifier]);
         return $response->json();
     }
 
@@ -61,7 +62,7 @@ class ZslApi
     public function getLink($chapter, $link, $token = null)
     {
         $token = $token ?: \config('zslapi.MANAGER_TOKEN');
-        $response = Http::withToken($token)->acceptJson()->post(config('zslapi.CONTENT_URL') . self::GET_LINK, ['chapter' => $chapter, 'link' => $link]);
+        $response = Http::withToken($token)->acceptJson()->post(config('zslapi.CONTENT_URL', self::DEFAULT_URL) . self::GET_LINK, ['chapter' => $chapter, 'link' => $link]);
         return $response->json();
     }
 
