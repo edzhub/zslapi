@@ -56,12 +56,11 @@ class ZslApi
     /**
      * @param $chapter
      * @param $link
-     * @param null $token
+     * @param $token
      * @return array|mixed
      */
-    public function getLink($chapter, $link, $token = null)
+    public function getLink($chapter, $link, $token)
     {
-        $token = $token ?: \config('zslapi.MANAGER_TOKEN');
         $response = Http::withToken($token)->acceptJson()->post(config('zslapi.CONTENT_URL', self::DEFAULT_URL) . self::GET_LINK, ['chapter' => $chapter, 'link' => $link]);
         return $response->json();
     }
