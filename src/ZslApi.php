@@ -6,12 +6,12 @@ use Illuminate\Support\Facades\Http;
 
 class ZslApi
 {
-    const DEFAULT_URL = 'https://content.zerosciencelab.com/api/';
-    const GET_CLASSES = 'Classes/get';
-    const GET_SUBJECTS = 'Classes/get_subjects';
-    const GET_CHAPTERS = 'Chapter/get';
-    const GET_LINK = 'Link/get';
-    const CREATE_USER = 'Create/User';
+    public const DEFAULT_URL = 'https://content.zerosciencelab.com/api/';
+    public const GET_CLASSES = 'Classes/get';
+    public const GET_SUBJECTS = 'Classes/get_subjects';
+    public const GET_CHAPTERS = 'Chapter/get';
+    public const GET_LINK = 'Link/get';
+    public const CREATE_USER = 'Create/User';
 
     /**
      * @return array|mixed
