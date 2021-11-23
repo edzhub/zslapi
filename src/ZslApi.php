@@ -59,7 +59,7 @@ class ZslApi
      * @param $token
      * @return array|mixed
      */
-    public function getLink($chapter, $link, $token)
+    public static function getLink($chapter, $link, $token)
     {
         $response = Http::withToken($token)->acceptJson()->post(config('zslapi.CONTENT_URL', self::DEFAULT_URL) . self::GET_LINK, ['chapter' => $chapter, 'link' => $link]);
         return $response->json();
