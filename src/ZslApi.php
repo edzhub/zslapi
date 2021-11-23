@@ -2,6 +2,8 @@
 
 namespace Edzhub\Zslapi;
 
+use GuzzleHttp\Promise\PromiseInterface;
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 
 class ZslApi
@@ -15,62 +17,62 @@ class ZslApi
     private const GET_CLASS_LINKS = 'Classes/getLinks';
 
     /**
-     * @return array|mixed
+     * @return PromiseInterface|Response
      */
     public static function getClasses()
     {
-        $response = Http::withToken(\config('zslapi.MANAGER_TOKEN'))->acceptJson()->post(config('zslapi.CONTENT_URL', self::DEFAULT_URL) . self::GET_CLASSES);
-        return $response->json();
+        return Http::withToken(\config('zslapi.MANAGER_TOKEN'))->acceptJson()->post(config('zslapi.CONTENT_URL', self::DEFAULT_URL) . self::GET_CLASSES);
     }
 
     /**
      * @param $class
-     * @return array|mixed
+     * @return PromiseInterface|Response
      */
     public static function getSubjects($class)
     {
-        $response = Http::withToken(\config('zslapi.MANAGER_TOKEN'))->acceptJson()->post(config('zslapi.CONTENT_URL', self::DEFAULT_URL) . self::GET_SUBJECTS, ['class' => $class]);
-        return $response->json();
+        return Http::withToken(\config('zslapi.MANAGER_TOKEN'))->acceptJson()->post(config('zslapi.CONTENT_URL', self::DEFAULT_URL) . self::GET_SUBJECTS, ['class' => $class]);
+
     }
 
     /**
      * @param $class
      * @param $subject
-     * @return array|mixed
+     * @return PromiseInterface|Response
      */
     public static function getChapters($class, $subject)
     {
-        $response = Http::withToken(\config('zslapi.MANAGER_TOKEN'))->acceptJson()->post(config('zslapi.CONTENT_URL', self::DEFAULT_URL) . self::GET_CHAPTERS, ['class' => $class, 'subject' => $subject]);
-        return $response->json();
+        return Http::withToken(\config('zslapi.MANAGER_TOKEN'))->acceptJson()->post(config('zslapi.CONTENT_URL', self::DEFAULT_URL) . self::GET_CHAPTERS, ['class' => $class, 'subject' => $subject]);
     }
 
     /**
      * @param null $identifier
-     * @return array|mixed
+     * @return PromiseInterface|Response
      */
     public static function createUser($identifier = null)
     {
-        $response = Http::withToken(\config('zslapi.MANAGER_TOKEN'))->acceptJson()->post(config('zslapi.CONTENT_URL', self::DEFAULT_URL) . self::CREATE_USER, ['identifier' => $identifier]);
-        return $response->json();
+        return Http::withToken(\config('zslapi.MANAGER_TOKEN'))->acceptJson()->post(config('zslapi.CONTENT_URL', self::DEFAULT_URL) . self::CREATE_USER, ['identifier' => $identifier]);
     }
 
     /**
      * @param $chapter
      * @param $link
      * @param $token
-     * @return array|mixed
+     * @return PromiseInterface|Response
      */
     public static function getLink($chapter, $link, $token)
     {
-        $response = Http::withToken($token)->acceptJson()->post(config('zslapi.CONTENT_URL', self::DEFAULT_URL) . self::GET_LINK, ['chapter' => $chapter, 'link' => $link]);
-        return $response->json();
+        return Http::withToken($token)->acceptJson()->post(config('zslapi.CONTENT_URL', self::DEFAULT_URL) . self::GET_LINK, ['chapter' => $chapter, 'link' => $link]);
     }
 
+    /**
+     * @param $class
+     * @param null $token
+     * @return PromiseInterface|Response
+     */
     public static function getClassLinks($class, $token = null)
     {
         $httpToken = $token ?? \config('zslapi.MANAGER_TOKEN');
-        $response = Http::withToken($httpToken)->acceptJson()->post(config('zslapi.CONTENT_URL', self::DEFAULT_URL) . self::GET_CLASS_LINKS, ['class' => $class]);
-        return $response->json();
+        return Http::withToken($httpToken)->acceptJson()->post(config('zslapi.CONTENT_URL', self::DEFAULT_URL) . self::GET_CLASS_LINKS, ['class' => $class]);
     }
 
 }
