@@ -6,12 +6,13 @@ use Illuminate\Support\Facades\Http;
 
 class ZslApi
 {
-    public const DEFAULT_URL = 'https://content.zerosciencelab.com/api/';
-    public const GET_CLASSES = 'Classes/get';
-    public const GET_SUBJECTS = 'Classes/get_subjects';
-    public const GET_CHAPTERS = 'Chapter/get';
-    public const GET_LINK = 'Link/get';
-    public const CREATE_USER = 'Create/User';
+    private const DEFAULT_URL = 'https://content.zerosciencelab.com/api/';
+    private const GET_CLASSES = 'Classes/get';
+    private const GET_SUBJECTS = 'Classes/get_subjects';
+    private const GET_CHAPTERS = 'Chapter/get';
+    private const GET_LINK = 'Link/get';
+    private const CREATE_USER = 'Create/User';
+    private const GET_CLASS_LINKS = 'Classes/getLinks';
 
     /**
      * @return array|mixed
@@ -62,6 +63,13 @@ class ZslApi
     public static function getLink($chapter, $link, $token)
     {
         $response = Http::withToken($token)->acceptJson()->post(config('zslapi.CONTENT_URL', self::DEFAULT_URL) . self::GET_LINK, ['chapter' => $chapter, 'link' => $link]);
+        return $response->json();
+    }
+
+    public static function getClassLinks($class, $token = null)
+    {
+        $httpToken = $token ?? \config('zslapi.MANAGER_TOKEN');
+        $response = Http::withToken($httpToken)->acceptJson()->post(config('zslapi.CONTENT_URL', self::DEFAULT_URL) . self::GET_CLASS_LINKS, ['class' => $class]);
         return $response->json();
     }
 
