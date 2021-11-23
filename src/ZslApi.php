@@ -19,38 +19,43 @@ class ZslApi
     /**
      * @return PromiseInterface|Response
      */
-    public static function getClasses()
+    public static function getClasses($token = null)
     {
-        return Http::withToken(\config('zslapi.MANAGER_TOKEN'))->acceptJson()->post(config('zslapi.CONTENT_URL', self::DEFAULT_URL) . self::GET_CLASSES);
+        $httpToken = $token ?? \config('zslapi.MANAGER_TOKEN');
+        return Http::withToken($httpToken)->acceptJson()->post(config('zslapi.CONTENT_URL', self::DEFAULT_URL) . self::GET_CLASSES);
     }
 
     /**
      * @param $class
+     * @param null $token
      * @return PromiseInterface|Response
      */
-    public static function getSubjects($class)
+    public static function getSubjects($class, $token = null)
     {
-        return Http::withToken(\config('zslapi.MANAGER_TOKEN'))->acceptJson()->post(config('zslapi.CONTENT_URL', self::DEFAULT_URL) . self::GET_SUBJECTS, ['class' => $class]);
-
+        $httpToken = $token ?? \config('zslapi.MANAGER_TOKEN');
+        return Http::withToken($httpToken)->acceptJson()->post(config('zslapi.CONTENT_URL', self::DEFAULT_URL) . self::GET_SUBJECTS, ['class' => $class]);
     }
 
     /**
      * @param $class
      * @param $subject
+     * @param null $token
      * @return PromiseInterface|Response
      */
-    public static function getChapters($class, $subject)
+    public static function getChapters($class, $subject, $token = null)
     {
-        return Http::withToken(\config('zslapi.MANAGER_TOKEN'))->acceptJson()->post(config('zslapi.CONTENT_URL', self::DEFAULT_URL) . self::GET_CHAPTERS, ['class' => $class, 'subject' => $subject]);
+        $httpToken = $token ?? \config('zslapi.MANAGER_TOKEN');
+        return Http::withToken($httpToken)->acceptJson()->post(config('zslapi.CONTENT_URL', self::DEFAULT_URL) . self::GET_CHAPTERS, ['class' => $class, 'subject' => $subject]);
     }
 
     /**
      * @param null $identifier
      * @return PromiseInterface|Response
      */
-    public static function createUser($identifier = null)
+    public static function createUser($identifier = null, $token = null)
     {
-        return Http::withToken(\config('zslapi.MANAGER_TOKEN'))->acceptJson()->post(config('zslapi.CONTENT_URL', self::DEFAULT_URL) . self::CREATE_USER, ['identifier' => $identifier]);
+        $httpToken = $token ?? \config('zslapi.MANAGER_TOKEN');
+        return Http::withToken($httpToken)->acceptJson()->post(config('zslapi.CONTENT_URL', self::DEFAULT_URL) . self::CREATE_USER, ['identifier' => $identifier]);
     }
 
     /**
