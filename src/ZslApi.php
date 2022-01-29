@@ -15,6 +15,7 @@ class ZslApi
     private const GET_LINK = 'Link/get';
     private const CREATE_USER = 'Create/User';
     private const GET_CLASS_LINKS = 'Classes/getLinks';
+    private const GET_CHAPTER_LINKS = 'Chapter/getLinks';
 
     /**
      * @return PromiseInterface|Response
@@ -78,6 +79,12 @@ class ZslApi
     {
         $httpToken = $token ?? \config('zslapi.MANAGER_TOKEN');
         return Http::withToken($httpToken)->acceptJson()->post(config('zslapi.CONTENT_URL', self::DEFAULT_URL) . self::GET_CLASS_LINKS, ['class' => $class]);
+    }
+
+    public static function getChapterLinks($chapter, $token = null)
+    {
+        $httpToken = $token ?? \config('zslapi.MANAGER_TOKEN');
+        return Http::withToken($httpToken)->acceptJson()->post(config('zslapi.CONTENT_URL', self::DEFAULT_URL) . self::GET_CHAPTER_LINKS, ['chapter' => $chapter]);
     }
 
 }
