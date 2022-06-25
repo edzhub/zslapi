@@ -66,9 +66,9 @@ class ZslApi
      * @param $token
      * @return PromiseInterface|Response
      */
-    public static function getLink($chapter, $link, $token)
+    public static function getLink($chapter, $link, $token, $sublink = '')
     {
-        return Http::withToken($token)->acceptJson()->post(config('zslapi.CONTENT_URL', self::DEFAULT_URL) . self::GET_LINK, ['chapter' => $chapter, 'link' => $link]);
+        return Http::withToken($token)->acceptJson()->post(config('zslapi.CONTENT_URL', self::DEFAULT_URL) . self::GET_LINK, ['chapter' => $chapter, 'link' => $link, 'sublink' => $sublink]);
     }
 
     /**
