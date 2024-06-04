@@ -17,6 +17,7 @@ class ZslApi
     private const CREATE_USER = 'Create/User';
     private const GET_CLASS_LINKS = 'Classes/getLinks';
     private const GET_CHAPTER_LINKS = 'Chapter/getLinks';
+    private const UPDATE_USER = 'User/update';
 
     /**
      * @return PromiseInterface|Response
@@ -102,5 +103,11 @@ class ZslApi
     {
         $httpToken = $token ?? \config('zslapi.MANAGER_TOKEN');
         return Http::withToken($httpToken)->acceptJson()->post(config('zslapi.CONTENT_URL', self::DEFAULT_URL) . self::VIEW_LINK, ['link' => $link]);
+    }
+
+    public static function updateUser($token = null)
+    {
+        $httpToken = $token ?? \config('zslapi.MANAGER_TOKEN');
+        return Http::withToken($httpToken)->acceptJson()->post(config('zslapi.CONTENT_URL', self::DEFAULT_URL) . self::UPDATE_USER);
     }
 }
