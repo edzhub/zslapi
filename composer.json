@@ -3,6 +3,17 @@
     "description": "This Package will provide ZSL Content Access",
     "type": "library",
     "license": "MIT",
+    "keywords": [
+        "zslapi",
+        "zsl",
+        "zsl content",
+        "zsl content access",
+        "zsl content api",
+        "zsl content access api",
+        "zsl content access package",
+        "zsl content access laravel package",
+        "zsl content access laravel package"
+    ],
     "autoload": {
         "psr-4": {
             "Edzhub\\Zslapi\\": "src/"
