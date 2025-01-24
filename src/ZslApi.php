@@ -105,9 +105,9 @@ class ZslApi
         return Http::withToken($httpToken)->acceptJson()->post(config('zslapi.CONTENT_URL', self::DEFAULT_URL) . self::VIEW_LINK, ['link' => $link]);
     }
 
-    public static function updateUser($userId): PromiseInterface|Response
+    public static function updateUser($userId,$fullAccess = false): PromiseInterface|Response
     {
         $httpToken = \config('zslapi.MANAGER_TOKEN');
-        return Http::withToken($httpToken)->acceptJson()->post(config('zslapi.CONTENT_URL', self::DEFAULT_URL) . self::UPDATE_USER,['user_id' => $userId]);
+        return Http::withToken($httpToken)->acceptJson()->post(config('zslapi.CONTENT_URL', self::DEFAULT_URL) . self::UPDATE_USER,['user_id' => $userId,'full_access' => $fullAccess]);
     }
 }
