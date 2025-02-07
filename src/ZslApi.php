@@ -22,10 +22,10 @@ class ZslApi
     /**
      * @return PromiseInterface|Response
      */
-    public static function getClasses($token = null): PromiseInterface|Response
+    public static function getClasses($token = null, $syllabus = null): PromiseInterface|Response
     {
         $httpToken = $token ?? \config('zslapi.MANAGER_TOKEN');
-        return Http::withToken($httpToken)->acceptJson()->post(config('zslapi.CONTENT_URL', self::DEFAULT_URL) . self::GET_CLASSES);
+        return Http::withToken($httpToken)->acceptJson()->post(config('zslapi.CONTENT_URL', self::DEFAULT_URL) . self::GET_CLASSES, ['syllabus' => $syllabus]);
     }
 
     /**
